@@ -7,7 +7,7 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/jobs")
+    axios.get("http://joblist-1-4hfb.onrender.com/api/jobs")
       .then(res => setJobs(res.data))
       .catch(err => console.log(err));
   }, []);

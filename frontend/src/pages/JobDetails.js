@@ -10,7 +10,7 @@ function JobDetails() {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await axios.get(`http://joblist-1-4hfb.onrender.com/api/jobs/${id}`);
+        const res = await axios.get(`https://joblist-1-4hfb.onrender.com/api/jobs/${id}`);
         setJob(res.data);
       } catch (err) {
         console.log(err);

@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+
+const API = process.env.REACT_APP_API_URL;
 function Home() {
   const [jobs, setJobs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("https://joblist-1-4hfb.onrender.com/api/jobs", {
+    axios.get(`${API}/api/jobs`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

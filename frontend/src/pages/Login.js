@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+const API = process.env.REACT_APP_API_URL;
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -12,7 +14,7 @@ function Login() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://joblist-1-4hfb.onrender.com/api/auth/login",
+        `${API}/api/auth/login`,
         { email, password }
       );
 

@@ -7,23 +7,20 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await axios.post("https://joblist-1-4hfb.onrender.com/api/auth/signup", {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://joblist-1-4hfb.onrender.com/api/auth/signup",
+        { name, email, password }
+      );
 
       setMessage(res.data.message);
 
       if (res.data.message === "Signup successful") {
-        navigate("/"); // redirect to login page
+        navigate("/login"); // go to login after signup
       }
     } catch (err) {
       setMessage(err.response?.data?.message || "Signup failed");
@@ -33,49 +30,37 @@ function Signup() {
   return (
     <div style={{ padding: "20px" }}>
       <div className="container">
-      <h2>Signup Page</h2>
+        <h2>Signup Page</h2>
 
-      <form onSubmit={handleSignup}>
-        <div>
-          <label>Name:</label><br />
+        <form onSubmit={handleSignup}>
           <input
             type="text"
-            placeholder="Enter name"
+            placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+            required
+          /><br /><br />
 
-        <br />
-
-        <div>
-          <label>Email:</label><br />
           <input
             type="email"
-            placeholder="Enter email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+            required
+          /><br /><br />
 
-        <br />
-
-        <div>
-          <label>Password:</label><br />
           <input
             type="password"
-            placeholder="Enter password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+            required
+          /><br /><br />
 
-        <br />
+          <button type="submit">Signup</button>
+        </form>
 
-        <button type="submit">Signup</button>
-      </form>
-
-      <p>{message}</p>
+        <p>{message}</p>
       </div>
     </div>
   );

@@ -10,16 +10,17 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await axios.post("https://joblist-1-4hfb.onrender.com/api/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://joblist-1-4hfb.onrender.com/api/auth/login",
+        { email, password }
+      );
 
-      localStorage.setItem("isLoggedIn", "true");
+      // Save token to localStorage
+      localStorage.setItem("token", res.data.token);
       setMessage(res.data.message);
-      navigate("/home");
+
+      navigate("/home"); // go to home
     } catch (err) {
       setMessage(err.response?.data?.message || "Login failed");
     }
@@ -28,29 +29,33 @@ function Login() {
   return (
     <div style={{ padding: "20px" }}>
       <div className="container">
-      <h2>Login Page</h2>
+        <h2>Login Page</h2>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        /><br /><br />
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          /><br /><br />
 
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        /><br /><br />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          /><br /><br />
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit">Login</button>
+        </form>
 
-      <p>{message}</p>
+        <p>{message}</p>
 
-      <p>
-        New user? <Link to="/signup">Signup first</Link>
-      </p>
+        <p>
+          New user? <Link to="/signup">Signup first</Link>
+        </p>
       </div>
     </div>
   );

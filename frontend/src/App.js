@@ -10,16 +10,10 @@ function App() {
   return (
     <Router>
       <Routes>
-
-        {/* Default route */}
         <Route path="/" element={<Login />} />
-
-        {/* Explicit login route */}
         <Route path="/login" element={<Login />} />
-
         <Route path="/signup" element={<Signup />} />
 
-        {/* Protected routes */}
         <Route
           path="/home"
           element={
@@ -46,7 +40,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
       </Routes>
     </Router>
   );

@@ -9,11 +9,12 @@ function Jobs() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${API}/api/jobs`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    axios
+      .get(`${API}/api/jobs`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => setJobs(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -26,9 +27,8 @@ function Jobs() {
         },
       });
 
-      // remove deleted job from UI
       setJobs(jobs.filter((job) => job._id !== id));
-    } catch (err) {
+    } catch {
       alert("Delete failed");
     }
   };
@@ -37,17 +37,21 @@ function Jobs() {
     <div style={{ padding: "20px" }}>
       <h2>Jobs List</h2>
 
-      <button onClick={() => navigate("/add-job")}>
-        Add Job
-      </button>
+      <button onClick={() => navigate("/add-job")}>Add Job</button>
 
       <ul>
         {jobs.map((job) => (
           <li key={job._id}>
             {job.title} - {job.company}
+
             <button onClick={() => navigate(`/jobs/${job._id}`)}>
               View
             </button>
+
+            <button onClick={() => navigate(`/edit-job/${job._id}`)}>
+              Edit
+            </button>
+
             <button onClick={() => deleteJob(job._id)}>
               Delete
             </button>

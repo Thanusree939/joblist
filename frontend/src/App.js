@@ -6,7 +6,7 @@ import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import ProtectedRoute from "./ProtectedRoute";
 import AddJob from "./pages/AddJob";
-
+import EditJob from "./pages/EditJob";
 
 function App() {
   return (
@@ -50,6 +50,15 @@ function App() {
     </ProtectedRoute>
   }
 />
+<Route
+  path="/edit-job/:id"
+  element={
+    <ProtectedRoute>
+      <EditJob />
+    </ProtectedRoute>
+  }
+/>
+
 
       </Routes>
     </Router>

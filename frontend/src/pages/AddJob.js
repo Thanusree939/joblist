@@ -9,7 +9,6 @@ function AddJob() {
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -25,9 +24,10 @@ function AddJob() {
           },
         }
       );
+
       navigate("/jobs");
     } catch (err) {
-      alert("Job creation failed");
+      alert("Failed to add job");
     }
   };
 
@@ -36,12 +36,12 @@ function AddJob() {
       <h2>Add Job</h2>
 
       <form onSubmit={handleSubmit}>
-        <input placeholder="Title" required onChange={e => setTitle(e.target.value)} /><br /><br />
-        <input placeholder="Company" required onChange={e => setCompany(e.target.value)} /><br /><br />
-        <input placeholder="Location" required onChange={e => setLocation(e.target.value)} /><br /><br />
-        <textarea placeholder="Description" required onChange={e => setDescription(e.target.value)} /><br /><br />
+        <input placeholder="Title" onChange={e => setTitle(e.target.value)} required /><br /><br />
+        <input placeholder="Company" onChange={e => setCompany(e.target.value)} required /><br /><br />
+        <input placeholder="Location" onChange={e => setLocation(e.target.value)} required /><br /><br />
+        <textarea placeholder="Description" onChange={e => setDescription(e.target.value)} required /><br /><br />
 
-        <button type="submit">Create Job</button>
+        <button type="submit">Add Job</button>
       </form>
     </div>
   );

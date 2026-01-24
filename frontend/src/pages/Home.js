@@ -26,6 +26,10 @@ function Home() {
   return (
     <div style={{ padding: "20px" }}>
       <button onClick={handleLogout}>Logout</button>
+      <button onClick={() => navigate("/add-job")}>
+  Add Job
+</button>
+
 
       <div className="container">
         <h2>Job List</h2>

@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import ProtectedRoute from "./ProtectedRoute";
+import AddJob from "./pages/AddJob";
+
 
 function App() {
   return (
@@ -40,6 +42,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/add-job"
+  element={
+    <ProtectedRoute>
+      <AddJob />
+    </ProtectedRoute>
+  }
+/>
+
       </Routes>
     </Router>
   );

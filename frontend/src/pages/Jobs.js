@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const API = process.env.REACT_APP_API_URL;
 
 function Jobs() {
@@ -17,25 +18,37 @@ function Jobs() {
     .catch(err => console.log(err));
   }, []);
 
+  const deleteJob = async (id) => {
+    try {
+      await axios.delete(`${API}/api/jobs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      setJobs(jobs.filter(job => job._id !== id));
+    } catch (err) {
+      alert("Delete failed");
+    }
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>Jobs List</h2>
 
-      {jobs.length === 0 ? (
-        <p>No jobs available</p>
-      ) : (
-        <ul>
-          {jobs.map(job => (
-            <li
-              key={job._id}
-              style={{ cursor: "pointer", marginBottom: "10px" }}
-              onClick={() => navigate(`/jobs/${job._id}`)}
-            >
-              {job.title} - {job.company} ({job.location})
-            </li>
-          ))}
-        </ul>
-      )}
+      <button onClick={() => navigate("/add-job")}>
+        Add Job
+      </button>
+
+      <ul>
+        {jobs.map(job => (
+          <li key={job._id}>
+            {job.title} - {job.company}
+            <button onClick={() => navigate(`/jobs/${job._id}`)}>View</button>
+            <button onClick={() => deleteJob(job._id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

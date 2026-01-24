@@ -14,8 +14,8 @@ function Jobs() {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
-    .then(res => setJobs(res.data))
-    .catch(err => console.log(err));
+      .then((res) => setJobs(res.data))
+      .catch((err) => console.log(err));
   }, []);
 
   const deleteJob = async (id) => {
@@ -26,7 +26,8 @@ function Jobs() {
         },
       });
 
-      setJobs(jobs.filter(job => job._id !== id));
+      // remove deleted job from UI
+      setJobs(jobs.filter((job) => job._id !== id));
     } catch (err) {
       alert("Delete failed");
     }
@@ -41,11 +42,15 @@ function Jobs() {
       </button>
 
       <ul>
-        {jobs.map(job => (
+        {jobs.map((job) => (
           <li key={job._id}>
             {job.title} - {job.company}
-            <button onClick={() => navigate(`/jobs/${job._id}`)}>View</button>
-            <button onClick={() => deleteJob(job._id)}>Delete</button>
+            <button onClick={() => navigate(`/jobs/${job._id}`)}>
+              View
+            </button>
+            <button onClick={() => deleteJob(job._id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
